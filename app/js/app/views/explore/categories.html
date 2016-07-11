@@ -1,0 +1,20 @@
+<div class="page-content">
+
+  <header class="page-title">Explore Books</header>
+
+  <section ng-repeat="category in ctrl.categories">
+    <header class="page-subtitle">{{ category.name }}</header>
+    <ol>
+      <book-card
+          ng-repeat="book in category.books"
+          show-shelf-picker="true"
+          show-votes="false"
+          book="book">
+      </book-card>
+    </ol>
+    <a ui-sref="explore.category({categoryId: category.categoryId})" class="btn clear">
+      See More
+    </a>
+
+  </section>
+</div>

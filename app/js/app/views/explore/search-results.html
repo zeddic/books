@@ -1,0 +1,22 @@
+<div class="page-content">
+
+
+  <div ng-if="!ctrl.term" >
+    Please enter a search term.
+  </div>
+
+  <div ng-show="ctrl.loading" class="spinner"></div>
+
+  <div ng-show="ctrl.term && !ctrl.loading">
+
+    <header class="title">{{ ctrl.results.totalItems }} Results</header>
+
+    <ol>
+      <li class="search-item" ng-repeat="i in ctrl.results.items">
+        <book volume="i"></book>
+      </li>
+    </ol>
+
+  </div>
+
+</div>

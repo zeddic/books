@@ -1,0 +1,2879 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"animat",
+				"animation_"
+			],
+			[
+				"back",
+				"backdropService_"
+			],
+			[
+				"backdrop",
+				"backdropService"
+			],
+			[
+				"backd",
+				"backdropService"
+			],
+			[
+				"position",
+				"positioning"
+			],
+			[
+				"coordi",
+				"coordinateSpaceDifference"
+			],
+			[
+				"on",
+				"onReposition_"
+			],
+			[
+				"ancho",
+				"anchorCorner"
+			],
+			[
+				"pos",
+				"positioning"
+			],
+			[
+				"anc",
+				"anchorPoint"
+			],
+			[
+				"posi",
+				"position"
+			],
+			[
+				"getS",
+				"getShelvesBookIsIn"
+			],
+			[
+				"apis",
+				"apisLoaded"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "build.js",
+			"settings":
+			{
+				"buffer_size": 355,
+				"line_ending": "Unix",
+				"name": "build.js"
+			}
+		},
+		{
+			"file": "app/js/app/views/explore/categories.html",
+			"settings":
+			{
+				"buffer_size": 516,
+				"line_ending": "Unix",
+				"name": "categories.html"
+			}
+		},
+		{
+			"file": "app/js/app/views/dev/dev-categories-ctrl.js",
+			"settings":
+			{
+				"buffer_size": 2858,
+				"line_ending": "Unix",
+				"name": "dev-categories-ctrl.js"
+			}
+		},
+		{
+			"file": "app/js/app/components/dialog/dialog.js",
+			"settings":
+			{
+				"buffer_size": 3318,
+				"line_ending": "Unix",
+				"name": "dialog.js"
+			}
+		},
+		{
+			"file": "app/js/app/views/about/about-dialog.html",
+			"settings":
+			{
+				"buffer_size": 510,
+				"line_ending": "Unix",
+				"name": "about-dialog.html"
+			}
+		},
+		{
+			"file": "app/js/app/views/dev/dev-categories.html",
+			"settings":
+			{
+				"buffer_size": 1618,
+				"line_ending": "Unix",
+				"name": "dev-categories-ctrl.html"
+			}
+		},
+		{
+			"file": "Gruntfile.js",
+			"settings":
+			{
+				"buffer_size": 1219,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/app/components/book/book.html",
+			"settings":
+			{
+				"buffer_size": 177,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/components/book/book.js",
+			"settings":
+			{
+				"buffer_size": 532,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/views/explore/book.html",
+			"settings":
+			{
+				"buffer_size": 1232,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/components/bookcard/book-card.js",
+			"settings":
+			{
+				"buffer_size": 1818,
+				"line_ending": "Unix",
+				"name": "book-card.js"
+			}
+		},
+		{
+			"file": "app/js/app/app.js",
+			"settings":
+			{
+				"buffer_size": 884,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/route.js",
+			"settings":
+			{
+				"buffer_size": 2860,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/services/gbooks.js",
+			"settings":
+			{
+				"buffer_size": 9153,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/route-redirect-to.js",
+			"settings":
+			{
+				"buffer_size": 1016,
+				"line_ending": "Unix",
+				"name": "route-redirect-to.js"
+			}
+		},
+		{
+			"file": "app/js/app/views/explore/categories-ctrl.js",
+			"settings":
+			{
+				"buffer_size": 544,
+				"line_ending": "Unix",
+				"name": "categories-ctrl.js"
+			}
+		},
+		{
+			"file": "app/js/app/views/explore/category-ctrl.js",
+			"settings":
+			{
+				"buffer_size": 511,
+				"line_ending": "Unix",
+				"name": "category-ctrl.js"
+			}
+		},
+		{
+			"file": "app/js/app/views/explore/category.html",
+			"settings":
+			{
+				"buffer_size": 264,
+				"line_ending": "Unix",
+				"name": "category.html"
+			}
+		},
+		{
+			"file": "app/js/app/components/position/positioning.js",
+			"settings":
+			{
+				"buffer_size": 11883,
+				"line_ending": "Unix",
+				"name": "positioning.js"
+			}
+		},
+		{
+			"file": "app/js/app/components/shelfpicker/shelf-picker.html",
+			"settings":
+			{
+				"buffer_size": 587,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "define(function(require) {\n  var Rect = require('./rect');\n  var Point = require('./point');\n  var Corner = require('./corner');\n  var positioning = require('./positioning');\n\n  /** \n   * @constructor\n   */\n  PositionService = function($rootScope, $window) {\n    this.positioned = {};\n    this.keyGen = 0;\n    // TODO(scott): Rate limit these through $$RAF\n    let repositionFn = this.onReposition_.bind(this);\n    $window.addEventListener('resize', repositionFn);\n    $window.addEventListener('orientationchange', repositionFn);\n    $window.addEventListener('scroll', repositionFn, true);\n\n    $rootScope.$on('$destroy', function() {\n      $window.removeEventListener('resize', repositionFn);\n      $window.removeEventListener('orientationchange', repositionFn);\n      $window.removeEventListener('scroll', repositionFn, true);\n    });\n  };\n\n  /**\n   * @private\n   */\n  PositionService.prototype.onReposition_ = function() {\n    let i = 0;\n    for (var key in this.positioned) {\n      var config = this.positioned[key];\n      this.positionConfig_(config);\n      i++;\n    }\n    console.log('Updated ' + i + ' registered')\n  };\n\n\n  PositionService.prototype.position = function(el, anchor, corner, anchorCorner) {\n    angular.element(el).addClass('positioned');\n\n    var config = {\n      el: el,\n      anchor: anchor,\n      corner: Corner.fromString(corner),\n      anchorCorner: Corner.fromString(anchorCorner),\n    };\n\n    var key = this.keyGen++;\n    this.positioned[key] = config;\n    this.positionConfig_(config);\n    return key;\n  };\n\n  PositionService.prototype.unregister = function(key) {\n    var config = this.positioned[key];\n\n    console.log('unregister!');\n\n    if (!config) {\n      return false;\n    }\n\n    angular.element(config.el).removeClass('positioned');\n    delete this.positioned[key];\n    return true;\n  };\n\n\n  PositionService.prototype.positionConfig_ = function(config) {\n    positioning.position(config);\n  };\n\n  return PositionService;\n});\n",
+			"file": "app/js/app/components/position/position-service.js",
+			"file_size": 1965,
+			"file_write_time": 131046989286141855,
+			"settings":
+			{
+				"buffer_size": 1965,
+				"line_ending": "Unix",
+				"name": "position-service.js"
+			}
+		},
+		{
+			"file": "app/js/app/main.js",
+			"settings":
+			{
+				"buffer_size": 692,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/components/components.js",
+			"settings":
+			{
+				"buffer_size": 848,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/views/about/about.html",
+			"settings":
+			{
+				"buffer_size": 1143,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/views/about/about-ctrl.js",
+			"settings":
+			{
+				"buffer_size": 295,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 1178,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/app/views/shelves/shelf.html",
+			"settings":
+			{
+				"buffer_size": 433,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/components/bookcard/book-card.html",
+			"settings":
+			{
+				"buffer_size": 933,
+				"line_ending": "Unix",
+				"name": "book-card.html"
+			}
+		},
+		{
+			"file": "app/js/app/views/recommended/recommended.html",
+			"settings":
+			{
+				"buffer_size": 478,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/services/googapi.js",
+			"settings":
+			{
+				"buffer_size": 3999,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/views/shelves/shelves-ctrl.js",
+			"settings":
+			{
+				"buffer_size": 459,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/components/shelfpicker/shelf-picker.js",
+			"settings":
+			{
+				"buffer_size": 1833,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/css/main.css",
+			"settings":
+			{
+				"buffer_size": 13146,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "define(function(require) {\n  var angular = require('lib/angular');\n  var positioning = require('./../position/positioning');\n\n  var Keys = {\n    ESC: 27\n  };\n\n  /** @nginject */\n  function DropdownDirective() {\n    return {\n      controller: DropdownController,\n      controllerAs: 'ctrl',\n      scope: {},\n      link: function(scope, el, attrs, ctrl) {\n        el.addClass('dropdown-container');\n        ctrl.init();\n      }\n    }\n  };\n\n    /** @nginject */\n  function DropdownController($window, $element, $document, $scope, $attrs, $$rAF) {\n    this.window_ = $window;\n    this.el = $element;\n    this.rAF_ = $$rAF;\n    this.open = false;\n    this.toggleEl = null;\n    this.popupEl = null;\n\n    let onDocClick = this.onDocClick_.bind(this);\n    let onKeyDown = this.onKeyDown_.bind(this);\n    let cleanupLayoutListeners = this.setupLayoutListeners_(this.onLayout_.bind(this));\n\n    $document.on('click', onDocClick);\n    $document.on('keydown', onKeyDown);\n\n    // Cleanup global listeners.\n    $scope.$on('$destroy', () => {\n      $document.off('click', onDocClick);\n      $document.off('keydown', onKeyDown);\n      cleanupLayoutListeners();\n    });\n  };\n\n  DropdownController.prototype.init = function() {\n    //this.popup = popupService_.popup();\n  };\n\n  DropdownController.prototype.toggle = function() {\n    this.setOpen(!this.open);\n  };\n\n  DropdownController.prototype.setOpen = function(open) {\n    this.open = open;\n    this.el.toggleClass('open', this.open);\n    this.toggleEl && this.toggleEl.toggleClass('pressed', this.open);\n    this.open && this.reposition_();\n  };\n\n  DropdownController.prototype.onDocClick_ = function(e) {\n    if (!this.open || this.el[0].contains(e.target)) {\n      return;\n    }\n    this.setOpen(false);\n  };\n\n  DropdownController.prototype.onLayout_ = function() {\n    if (this.open) {\n      this.reposition_();\n    }\n  };\n\n  DropdownController.prototype.onKeyDown_ = function(e) {\n    if (e.which == Keys.ESC) {\n      this.setOpen(false);\n    }\n  };\n\n  DropdownController.prototype.reposition_ = function() {\n    var corner = this.popupEl.attr('corner');\n    var anchorCorner = this.popupEl.attr('anchorCorner');\n\n\n  };\n\n\n  DropdownController.prototype.setupLayoutListeners_ = function(cb) {\n    let repositionFn = this.throttleViaRAF_(cb);\n    const window = this.window_;\n\n    window.addEventListener('resize', repositionFn);\n    window.addEventListener('orientationchange', repositionFn);\n    window.addEventListener('scroll', repositionFn, true);\n\n    return function cleanupListeners() {\n      window.removeEventListener('resize', repositionFn);\n      window.removeEventListener('orientationchange', repositionFn);\n      window.removeEventListener('scroll', repositionFn, true);\n    }\n  };\n\n  /**\n   * Returns a throttled version of a function that will \n   * only be called at most once per request animation frame.\n   *\n   * If the throttled function is called multiple times within\n   * the same animation frame, only the *last* call will be\n   * executed on the next frame - all other calls will be lost.\n   *\n   * This is appropriate for spammy events, such as window\n   * resize events or scrolling, where you only care about the\n   * last event and there is no need to waste CPU cycles.\n   *\n   * Based off of ng-materials $rAF decorator.\n   *\n   * TODO(scott): move this to a common location.\n   * \n   * @param {function} fn Function to throttle\n   * @return {function} fn that has been throttled\n   */\n  DropdownController.prototype.throttleViaRAF_ = function(fn) {\n    var rAF = this.rAF_;\n    let pending = false;\n    let lastContext, lastArguments;\n\n    return function throttled() {\n      lastContext = this;\n      lastArguments = arguments;\n\n      if (!pending) {\n        pending = true;\n        rAF(function() {\n          fn.apply(lastContext, Array.prototype.slice.call(lastArguments));\n          pending = false;\n        });\n      }\n    };\n\n  };\n\n  /**\n   * Directive for the button or link that should toggle\n   * visibility of the dropdown popup.\n   */\n  function DropdownToggleDirective() {\n    return {\n      scope: {},\n      require: '^dropdown',\n      link: function(scope, el, attrs, dropdownCtrl) {\n        el.addClass('dropdown-toggle');\n        dropdownCtrl.toggleEl = el;\n\n        var toggle = function(e) {\n          e.preventDefault();\n          if (attrs['disabled'] || el.hasClass('disabled')) {\n            return;\n          }\n          scope.$apply(() => dropdownCtrl.toggle());\n        };\n\n        el.on('click', toggle);\n        scope.$on('$destroy', () => el.off('click', toggle));\n      }\n    }\n  };\n\n\n  /**\n   * Directive for the dropdown contents.\n   */\n  function DropdownPopupDirective() {\n    return {\n      scope: {},\n      require: '^dropdown',\n      link: function(scope, el, attrs, dropdownCtrl) {\n        el.addClass('dropdown-popup');\n        dropdownCtrl.popupEl = el;\n      }\n    }\n  };\n\n\n  return angular\n      .module('books.components.dropdown', [])\n      .directive('dropdown', DropdownDirective)\n      .directive('dropdownToggle', DropdownToggleDirective)\n      .directive('dropdownPopup', DropdownPopupDirective)\n});\n",
+			"file": "app/js/app/components/dropdown/dropdown.js",
+			"file_size": 5495,
+			"file_write_time": 131047817496337452,
+			"settings":
+			{
+				"buffer_size": 5121,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/components/backdrop/backdrop.js",
+			"settings":
+			{
+				"buffer_size": 1208,
+				"line_ending": "Unix",
+				"name": "backdrop.js"
+			}
+		},
+		{
+			"file": "app/js/app/components/dialog/dialog-module.js",
+			"settings":
+			{
+				"buffer_size": 1077,
+				"line_ending": "Unix",
+				"name": "dialog.js"
+			}
+		},
+		{
+			"file": "app/js/app/components/dialog/basic-dialog.html",
+			"settings":
+			{
+				"buffer_size": 62,
+				"line_ending": "Unix",
+				"name": "basic-dialog.html"
+			}
+		},
+		{
+			"contents": "define(function(require) {\n  var Popup = require('./popup');\n\n  /** \n   * @constructor\n   */\n  PopupService = function($window, $document) {\n    this.window_ = $window;\n    this.document_ = $document;\n  };\n\n  /**\n   * Creates a new popup.\n   */\n  PopupService.prototype.popup = function(options) {\n    return new Popup(options, this.window_, this.document_);\n  };\n\n  return PopupService;\n});\n",
+			"file": "app/js/app/components/position/popup-service.js",
+			"file_size": 392,
+			"file_write_time": 131047155523497438,
+			"settings":
+			{
+				"buffer_size": 392,
+				"line_ending": "Unix",
+				"name": "popup-service.js"
+			}
+		},
+		{
+			"file": "app/js/app/views/root/root.html",
+			"settings":
+			{
+				"buffer_size": 1062,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/views/recommended/recommended-ctrl.js",
+			"settings":
+			{
+				"buffer_size": 1064,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app/components/animate/animate.js",
+			"settings":
+			{
+				"buffer_size": 442,
+				"line_ending": "Unix",
+				"name": "animate.js"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/app/components/position/rect.js",
+			"settings":
+			{
+				"buffer_size": 2417,
+				"line_ending": "Unix",
+				"name": "rect.js"
+			}
+		},
+		{
+			"file": "app/js/app/components/position/corner.js",
+			"settings":
+			{
+				"buffer_size": 2066,
+				"line_ending": "Unix",
+				"name": "corner.js"
+			}
+		},
+		{
+			"contents": "define(function(require) {\n  var positioning = require('./positioning');\n\n  /** \n   * @constructor\n   */\n  Popup = function(options, $window, $document) {\n    this.window_ = $window;\n\n    this.document_ = $document;\n\n    this.visible = false;\n\n    this.autoHide = true;\n\n    this.options = options;\n\n    this.autoHidePartners = [];\n\n    this.popupEl = angular.element(options.el);\n\n    this.setVisible(false);\n\n    this.setupListeners_();\n  };\n\n\n  Popup.prototype.dispose = function() {\n\n  };\n\n  Popup.prototype.setVisible = function(visible) {\n    this.visible = visible;\n    this.popupEl.css({'display': visible ? 'block': 'none'});\n    this.visible && this.reposition();\n  };\n\n  Popup.prototype.isVisible = function() {\n    return this.visible;\n  };\n\n  Popup.prototype.toggle = function() {\n    this.setVisible(!this.visible);\n  };\n\n  Popup.prototype.reposition = function() {\n    positioning.position(this.options);\n  };\n\n\n  Popup.prototype.setupListeners_ = function() {\n\n    var onDocClick = this.onDocClick_.bind(this);\n    // var onKeyDown = this.onKeyDown_.bind(this);\n\n    this.document_.on('click', onDocClick);\n\n\n\n    var cleanup = function() {\n      this.document_.off('click', onDocClick);\n    };\n\n    return cleanup;\n\n    //this.document_.on('keydown', onKeyDown);\n\n    // // Cleanup global listeners.\n    // $scope.$on('$destroy', () => {\n    //   $document.off('click', onDocClick);\n    //   $document.off('keydown', onKeyDown);\n    // });\n  };\n\n\n  Popup.prototype.cleanupListeners_ = function() {\n\n  };\n\n  Popup.prototype.onDocClick_ = function(e) {\n    if (!this.visible || this.inAutohidePartners_(e.target)) {\n      return;\n    }\n    console.log('autohiding');\n    this.setVisible(false);\n  };\n\n  Popup.prototype.inAutohidePartners_ = function(target) {\n    return false;\n  };\n\n  return Popup;\n});\n",
+			"file": "app/js/app/components/position/popup.js",
+			"file_size": 1819,
+			"file_write_time": 131047158229817366,
+			"settings":
+			{
+				"buffer_size": 1819,
+				"line_ending": "Unix",
+				"name": "popup.js"
+			}
+		},
+		{
+			"file": "app/js/app/components/position/point.js",
+			"settings":
+			{
+				"buffer_size": 367,
+				"line_ending": "Unix",
+				"name": "point.js"
+			}
+		},
+		{
+			"file": "app/js/app/components/position/position.js",
+			"settings":
+			{
+				"buffer_size": 137,
+				"line_ending": "Unix",
+				"name": "position.js"
+			}
+		},
+		{
+			"contents": "define(function(require) {\n  var angular = require('lib/angular');\n  var positioning = require('./positioning');\n\n\n  function findAnchor(fromEl, query) {    \n    var anchor;\n\n    while (fromEl = fromEl.offsetParent) {\n      anchor = fromEl.querySelector(query);\n      if (anchor) {\n        return anchor;\n      }      \n    }\n\n    return null;\n  };\n\n  /** @nginject */\n  function RelativeToDirective(positionService, $interval) {\n    return {\n      link: function(scope, el, attrs) {\n        var anchorQuery = attrs['relativeTo'];\n        var corner = attrs['corner'] || 'left top';\n        var anchorCorner = attrs['anchorCorner'] || 'left bottom';\n\n        var anchorEl = findAnchor(el[0], anchorQuery);\n\n        if (!anchorEl) {\n          console.error('relative-to unable to find anchor: ' + anchorQuery);\n          return;\n        }\n\n        var key = positionService.position(el[0], anchorEl, corner, anchorCorner);\n\n        scope.$on('$destroy', function() {\n          positionService.unregister(key);\n        });\n      },\n    }\n  };\n\n\n  return RelativeToDirective;\n});\n",
+			"file": "app/js/app/components/position/relative-to.js",
+			"file_size": 1076,
+			"file_write_time": 131043897300851261,
+			"settings":
+			{
+				"buffer_size": 1076,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/js/app/views/explore/book-ctrl.js",
+			"settings":
+			{
+				"buffer_size": 928,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "deploy/js/app/components/book/book.html",
+			"settings":
+			{
+				"buffer_size": 177,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 54.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: Insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: Install Package ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/scott/www/books",
+		"/home/scott/www/books/app",
+		"/home/scott/www/books/app/js",
+		"/home/scott/www/books/app/js/app",
+		"/home/scott/www/books/app/js/app/components",
+		"/home/scott/www/books/app/js/app/components/backdrop",
+		"/home/scott/www/books/app/js/app/components/dialog",
+		"/home/scott/www/books/app/js/app/components/dropdown",
+		"/home/scott/www/books/app/js/app/components/position",
+		"/home/scott/www/books/app/js/app/views",
+		"/home/scott/www/books/app/js/app/views/about"
+	],
+	"file_history":
+	[
+		"/home/scott/www/books/app/js/app/components/dialog/dialog-service.js",
+		"/home/scott/www/books/app/js/app/components/redirectto/redirect-to.js",
+		"/home/scott/www/books/app/js/app/components/dropdown/dropdown.js",
+		"/home/scott/www/books/app/js/app/components/position/relative-to.js",
+		"/home/scott/www/books/deploy/js/app/views/explore/book.html",
+		"/home/scott/www/books/app/css/main.css",
+		"/home/scott/www/books/deploy/js/app/app.js",
+		"/home/scott/www/books/deploy/google150f38ba44fadb1f.html",
+		"/home/scott/www/books/app/package.json",
+		"/home/scott/www/books/deploy/route.js",
+		"/home/scott/www/books/css/main.css",
+		"/home/scott/www/books/index.html",
+		"/home/scott/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/scott/www/books/js/app/route.js",
+		"/home/scott/www/books/js/app/views/explore/book.html",
+		"/home/scott/www/books/js/app/components/shelfpicker/shelf-picker.js",
+		"/home/scott/www/books/js/app/views/explore/book-ctrl.js",
+		"/home/scott/www/books/js/app/services/gbooks.js",
+		"/home/scott/www/books/js/app/components/components.js",
+		"/home/scott/www/books/js/app/components/book/book.html",
+		"/home/scott/www/books/js/app/views/recommended/recommended.html",
+		"/home/scott/www/books/js/app/views/recommended/recommended-ctrl.js",
+		"/home/scott/www/books/js/app/app.js",
+		"/home/scott/www/books/app/controllers/index.tmpl.php",
+		"/home/scott/www/books/js/app/views/root/root.html",
+		"/home/scott/www/books/js/app/views/root/root.js",
+		"/home/scott/www/books/js/app/components/header/header.js",
+		"/home/scott/www/books/js/app/components/dropdown/dropdown.html",
+		"/home/scott/www/books/js/app/components/shelfpicker/shelf-picker.html",
+		"/home/scott/www/books/js/app/components/dropdown/dropdown.js",
+		"/home/scott/www/books/js/app/views/about/about.html",
+		"/home/scott/www/books/js/app/views/about/about-ctrl.js",
+		"/home/scott/www/books/js/app/views/explore/search-results-ctrl.js",
+		"/home/scott/www/books/js/app/components/header/header.html",
+		"/home/scott/www/books/js/app/components/book/book.js",
+		"/home/scott/www/books/js/app/main.js",
+		"/home/scott/www/books/js/app/views/explore/search-results.html",
+		"/home/scott/www/books/js/app/services/googapi.js",
+		"/home/scott/www/books/app/views/master_template/linker.tmpl.php",
+		"/home/scott/www/books/js/app/views/shelves/shelves-ctrl.js",
+		"/home/scott/www/books/js/app/views/shelves/shelf-ctrl.js",
+		"/home/scott/www/books/js/app/views/shelves/shelf.html",
+		"/home/scott/www/books/js/app/views/shelves/shelves.html",
+		"/home/scott/www/books/app/views/master_template/app.tmpl.php",
+		"/home/scott/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/C/wamp/www/books/js/app/views/root/root-old.html",
+		"/C/wamp/www/books/js/app/googapi/googapi.js",
+		"/C/wamp/www/books/js/app/main.js",
+		"/C/wamp/www/books/js/app.js",
+		"/C/wamp/www/books/js/main.js",
+		"/C/wamp/www/books/core/model/model.php",
+		"/C/wamp/www/books/core/main/site.php",
+		"/C/wamp/www/books/app/config/config.php",
+		"/C/wamp/www/books/core/util/util.php",
+		"/C/wamp/www/books/core/util/fileutil.php",
+		"/C/wamp/www/books/core/main/core.php",
+		"/C/wamp/www/books/core/main/router.php",
+		"/C/wamp/www/books/app/views/master_template/linker.tmpl.php",
+		"/C/wamp/www/books/css/main.css",
+		"/C/wamp/www/books/css/reset.css",
+		"/C/wamp/www/books/core/sql/sql.php",
+		"/C/wamp/www/books/app/controllers/index.php",
+		"/C/wamp/www/books/app/controllers/index.tmpl.php",
+		"/C/wamp/www/books/js/lib/require.js",
+		"/C/wamp/www/books/app/views/master_template/app.tmpl.php",
+		"/C/wamp/www/books/app/models/book.php",
+		"/C/Users/zedd/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/zedd/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/wamp/www/books/app/controllers/basepage.php",
+		"/C/Users/zedd/AppData/Roaming/Sublime Text 3/Packages/Package Control/Package Control.sublime-settings"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"this.shelves_",
+			",\n",
+			"attrs_",
+			"this.open",
+			".corner",
+			"corner",
+			"uid",
+			"--------------------------------------",
+			"Rect",
+			"define(function(require) {\n  var angular = require('lib/angular');\n\n  /** @nginject */\n  function ShelfPickerDirective() {\n    return {\n      templateUrl: 'js/app/components/shelfpicker/shelf-picker.html',\n      controller: ShelfPickerController,\n      controllerAs: 'ctrl',\n      bindToController: true,\n      scope: {\n        'bookId': '=',\n        'buttonClasses': '@',\n      },\n      link: function(scope, el, attrs, ctrl) {\n        el.addClass('shelf-container');\n        var toggleEl = angular.element(el[0].querySelector('[dropdown-toggle]'));\n        toggleEl.addClass(ctrl.buttonClasses);\n      },\n    }\n  };\n\n    /** @ngInject */\n  function ShelfPickerController(gbooks) {\n    \n    /** @public {string} */\n    this.bookId;\n\n    this.containedIn = {};\n\n    this.shelves = [];\n\n    gbooks\n        .getShelvesBookIsIn(this.bookId)\n        .then(ids => this.containedIn = ids);\n\n    gbooks\n        .getVisibleShelves()\n        .then(shelves => this.shelves = shelves);\n\n    this.in = function(shelf) {\n      return !!this.containedIn[shelf.id];\n    };\n\n    this.toggle = function(shelf) {\n      if (this.in(shelf)) {\n        gbooks.removeBookFromShelf(this.bookId, shelf.id);\n      } else {\n        gbooks.addBookToShelf(this.bookId, shelf.id);\n      }\n    };\n\n    this.getIconName = function() {\n      var count = this.getCount();\n\n      if (count == 0) {\n        return 'filter_none';\n      } else if (count > 9) {\n        return 'filter_9_plus';\n      } else {\n        return 'filter_' + count;\n      }\n    };\n\n    this.getCount = function() {\n      var count = 0;\n      for (var key in this.containedIn) {\n        count += (this.containedIn[key] ? 1 : 0);\n      }\n      return count;\n    };\n  };\n\n  return angular\n      .module('books.components.shelfpicker', [])\n      .directive('shelfPicker', ShelfPickerDirective);\n});\n",
+			"shelvesByBookPromise_",
+			"shelvesByBook_",
+			"getShelfBookIds",
+			"getShelvesBookIsIn",
+			"for (",
+			"=>",
+			"Promise",
+			"{Promise}",
+			"recordStats",
+			"tab_",
+			"tab",
+			"ShowError(",
+			"$this->ShowError(\"Unable to connect to MySQL server: $this->host : '$SERVER_NAME'\");",
+			"mysql_"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "build.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 355,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								320,
+								320
+							]
+						],
+						"settings":
+						{
+							"auto_name": "build.js",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 63,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/js/app/views/explore/categories.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 516,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								516,
+								516
+							]
+						],
+						"settings":
+						{
+							"auto_name": "categories.html",
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 34,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/js/app/views/dev/dev-categories-ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2858,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								508,
+								508
+							]
+						],
+						"settings":
+						{
+							"auto_name": "dev-categories-ctrl.js",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "app/js/app/components/dialog/dialog.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3318,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								563,
+								563
+							]
+						],
+						"settings":
+						{
+							"auto_name": "dialog.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/js/app/views/about/about-dialog.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 510,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								510,
+								510
+							]
+						],
+						"settings":
+						{
+							"auto_name": "about-dialog.html",
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/js/app/views/dev/dev-categories.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1618,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1132,
+								1132
+							]
+						],
+						"settings":
+						{
+							"auto_name": "dev-categories-ctrl.html",
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 27,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "Gruntfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1219,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								396,
+								396
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 62,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/js/app/components/book/book.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								177
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 61,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "app/js/app/components/book/book.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 532,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								321,
+								321
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 59,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/js/app/views/explore/book.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1232,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								97,
+								97
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 42,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "app/js/app/components/bookcard/book-card.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1818,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								999,
+								999
+							]
+						],
+						"settings":
+						{
+							"auto_name": "book-card.js",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 38,
+					"type": "text"
+				},
+				{
+					"buffer": 11,
+					"file": "app/js/app/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 884,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								694,
+								694
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 22,
+					"type": "text"
+				},
+				{
+					"buffer": 12,
+					"file": "app/js/app/route.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2860,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								908,
+								908
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "app/js/app/services/gbooks.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9153,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8343,
+								8343
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 4981.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 28,
+					"type": "text"
+				},
+				{
+					"buffer": 14,
+					"file": "app/js/app/route-redirect-to.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1016,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								978,
+								978
+							]
+						],
+						"settings":
+						{
+							"auto_name": "route-redirect-to.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 19,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "app/js/app/views/explore/categories-ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								544,
+								544
+							]
+						],
+						"settings":
+						{
+							"auto_name": "categories-ctrl.js",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 33,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "app/js/app/views/explore/category-ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 511,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								383,
+								383
+							]
+						],
+						"settings":
+						{
+							"auto_name": "category-ctrl.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 35,
+					"type": "text"
+				},
+				{
+					"buffer": 17,
+					"file": "app/js/app/views/explore/category.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 264,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								264,
+								264
+							]
+						],
+						"settings":
+						{
+							"auto_name": "category.html",
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 36,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "app/js/app/components/position/positioning.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11883,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1768,
+								1768
+							]
+						],
+						"settings":
+						{
+							"auto_name": "positioning.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 663.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 30,
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "app/js/app/components/shelfpicker/shelf-picker.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								208,
+								208
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 25,
+					"type": "text"
+				},
+				{
+					"buffer": 20,
+					"file": "app/js/app/components/position/position-service.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1965,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								868,
+								868
+							]
+						],
+						"settings":
+						{
+							"auto_name": "position-service.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 50,
+					"type": "text"
+				},
+				{
+					"buffer": 21,
+					"file": "app/js/app/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 692,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								605,
+								605
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 23,
+					"type": "text"
+				},
+				{
+					"buffer": 22,
+					"file": "app/js/app/components/components.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 848,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								833,
+								833
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 14,
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "app/js/app/views/about/about.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1143,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1118,
+								1118
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 24,
+					"file": "app/js/app/views/about/about-ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 295,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								295,
+								295
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 13,
+					"type": "text"
+				},
+				{
+					"buffer": 25,
+					"file": "app/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1178,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								304,
+								304
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 48,
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "app/js/app/views/shelves/shelf.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 433,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								144,
+								144
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 47,
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "app/js/app/components/bookcard/book-card.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 933,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								595,
+								595
+							]
+						],
+						"settings":
+						{
+							"auto_name": "book-card.html",
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 51,
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "app/js/app/views/recommended/recommended.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 478,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								85,
+								85
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 45,
+					"type": "text"
+				},
+				{
+					"buffer": 29,
+					"file": "app/js/app/services/googapi.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3999,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1751,
+								1751
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 357.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 29,
+					"type": "text"
+				},
+				{
+					"buffer": 30,
+					"file": "app/js/app/views/shelves/shelves-ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 459,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								357,
+								357
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 20,
+					"type": "text"
+				},
+				{
+					"buffer": 31,
+					"file": "app/js/app/components/shelfpicker/shelf-picker.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1833,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1469,
+								1469
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 632.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 21,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 32,
+					"file": "app/css/main.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10050,
+								10050
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 9843.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 44,
+					"type": "text"
+				},
+				{
+					"buffer": 19,
+					"file": "app/js/app/components/shelfpicker/shelf-picker.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								339,
+								339
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 52,
+					"type": "text"
+				},
+				{
+					"buffer": 33,
+					"file": "app/js/app/components/dropdown/dropdown.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5121,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4884,
+								4884
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2339.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 34,
+					"file": "app/js/app/components/backdrop/backdrop.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1208,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1065,
+								1065
+							]
+						],
+						"settings":
+						{
+							"auto_name": "backdrop.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 35,
+					"file": "app/js/app/components/dialog/dialog-module.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1077,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								497,
+								497
+							]
+						],
+						"settings":
+						{
+							"auto_name": "dialog.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 36,
+					"file": "app/js/app/components/dialog/basic-dialog.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 62,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								62,
+								62
+							]
+						],
+						"settings":
+						{
+							"auto_name": "basic-dialog.html",
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 32,
+					"file": "app/css/main.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13146,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13103,
+								13103
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/CSS/CSS.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 13073.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 37,
+					"file": "app/js/app/components/position/popup-service.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 392,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								297,
+								297
+							]
+						],
+						"settings":
+						{
+							"auto_name": "popup-service.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 27,
+					"file": "app/js/app/components/bookcard/book-card.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 933,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								53,
+								53
+							]
+						],
+						"settings":
+						{
+							"auto_name": "book-card.html",
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 54,
+					"type": "text"
+				},
+				{
+					"buffer": 26,
+					"file": "app/js/app/views/shelves/shelf.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 433,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								216,
+								216
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 43,
+					"type": "text"
+				},
+				{
+					"buffer": 23,
+					"file": "app/js/app/views/about/about.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1143,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								175,
+								175
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 38,
+					"file": "app/js/app/views/root/root.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1062,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								870,
+								870
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 46,
+					"type": "text"
+				},
+				{
+					"buffer": 39,
+					"file": "app/js/app/views/recommended/recommended-ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1064,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								138,
+								138
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 57,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "app/js/app/services/gbooks.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9153,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5011,
+								5011
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2866.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 26,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/js/app/views/dev/dev-categories.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1618,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								241,
+								241
+							]
+						],
+						"settings":
+						{
+							"auto_name": "dev-categories-ctrl.html",
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 24,
+					"type": "text"
+				},
+				{
+					"buffer": 40,
+					"file": "app/js/app/components/animate/animate.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 442,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								246,
+								246
+							]
+						],
+						"settings":
+						{
+							"auto_name": "animate.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 56,
+					"type": "text"
+				},
+				{
+					"buffer": 41,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/home/scott/www/books/app/js/app/components",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 58,
+					"type": "text"
+				},
+				{
+					"buffer": 42,
+					"file": "app/js/app/components/position/rect.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2417,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								182,
+								182
+							]
+						],
+						"settings":
+						{
+							"auto_name": "rect.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 31,
+					"type": "text"
+				},
+				{
+					"buffer": 43,
+					"file": "app/js/app/components/position/corner.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2066,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								145,
+								145
+							]
+						],
+						"settings":
+						{
+							"auto_name": "corner.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 15,
+					"type": "text"
+				},
+				{
+					"buffer": 44,
+					"file": "app/js/app/components/position/popup.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1819,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1125,
+								1125
+							]
+						],
+						"settings":
+						{
+							"auto_name": "popup.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 408.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 49,
+					"type": "text"
+				},
+				{
+					"buffer": 45,
+					"file": "app/js/app/components/position/point.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 367,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								75
+							]
+						],
+						"settings":
+						{
+							"auto_name": "point.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 32,
+					"type": "text"
+				},
+				{
+					"buffer": 18,
+					"file": "app/js/app/components/position/positioning.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11883,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9746,
+								9746
+							]
+						],
+						"settings":
+						{
+							"auto_name": "positioning.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 4998.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 18,
+					"type": "text"
+				},
+				{
+					"buffer": 15,
+					"file": "app/js/app/views/explore/categories-ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 544,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								364,
+								364
+							]
+						],
+						"settings":
+						{
+							"auto_name": "categories-ctrl.js",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 17,
+					"type": "text"
+				},
+				{
+					"buffer": 46,
+					"file": "app/js/app/components/position/position.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 137,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								66,
+								66
+							]
+						],
+						"settings":
+						{
+							"auto_name": "position.js",
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 16,
+					"type": "text"
+				},
+				{
+					"buffer": 47,
+					"file": "app/js/app/components/position/relative-to.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1076,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								486,
+								486
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 55,
+					"type": "text"
+				},
+				{
+					"buffer": 48,
+					"file": "app/js/app/views/explore/book-ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 928,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								497,
+								497
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 41,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "app/js/app/services/gbooks.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9153,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8080,
+								8080
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 4753.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 40,
+					"type": "text"
+				},
+				{
+					"buffer": 28,
+					"file": "app/js/app/views/recommended/recommended.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 478,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								173,
+								173
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 60,
+					"type": "text"
+				},
+				{
+					"buffer": 31,
+					"file": "app/js/app/components/shelfpicker/shelf-picker.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1833,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1833,
+								1833
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 357.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 53,
+					"type": "text"
+				},
+				{
+					"buffer": 49,
+					"file": "deploy/js/app/components/book/book.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								177,
+								177
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 39,
+					"type": "text"
+				},
+				{
+					"buffer": 16,
+					"file": "app/js/app/views/explore/category-ctrl.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 511,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								162,
+								162
+							]
+						],
+						"settings":
+						{
+							"auto_name": "category-ctrl.js",
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 37,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "app/js/app/views/explore/book.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1232,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								462,
+								462
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.428236083166,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "books.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"main",
+				"app/css/main.css"
+			],
+			[
+				"book.html",
+				"app/js/app/views/explore/book.html"
+			],
+			[
+				"dropdown",
+				"app/js/app/components/dropdown/dropdown.js"
+			],
+			[
+				"shelf-picker",
+				"app/js/app/components/shelfpicker/shelf-picker.html"
+			],
+			[
+				"dev-cate",
+				"app/js/app/views/dev/dev-categories.html"
+			],
+			[
+				"gbooks",
+				"app/js/app/services/gbooks.js"
+			],
+			[
+				"routes.",
+				"app/js/app/route.js"
+			],
+			[
+				"dev",
+				"app/js/app/views/dev/dev-categories-ctrl.js"
+			],
+			[
+				"positioning",
+				"app/js/app/components/position/positioning.js"
+			],
+			[
+				"category.ht",
+				"app/js/app/views/explore/category.html"
+			],
+			[
+				"category",
+				"app/js/app/views/explore/category-ctrl.js"
+			],
+			[
+				"categories",
+				"app/js/app/views/explore/categories.html"
+			],
+			[
+				"route",
+				"app/js/app/route.js"
+			],
+			[
+				"categories.h",
+				"app/js/app/views/explore/categories.html"
+			],
+			[
+				"book-c",
+				"app/js/app/views/explore/book-ctrl.js"
+			],
+			[
+				"shelf",
+				"app/js/app/views/shelves/shelf.html"
+			],
+			[
+				"gbooks.",
+				"app/js/app/services/gbooks.js"
+			],
+			[
+				"cate",
+				"app/js/app/views/explore/categories-ctrl.js"
+			],
+			[
+				"categor",
+				"app/js/app/views/explore/categories-ctrl.js"
+			],
+			[
+				"recommend",
+				"app/js/app/views/recommended/recommended.html"
+			],
+			[
+				"categories-",
+				"app/js/app/views/explore/categories-ctrl.js"
+			],
+			[
+				"osition",
+				"app/js/app/components/position/positioning.js"
+			],
+			[
+				"relative-t",
+				"app/js/app/components/position/relative-to.js"
+			],
+			[
+				"about",
+				"app/js/app/views/about/about.html"
+			],
+			[
+				"main.css",
+				"app/css/main.css"
+			],
+			[
+				"about.html",
+				"app/js/app/views/about/about.html"
+			],
+			[
+				"main.c",
+				"app/css/main.css"
+			],
+			[
+				"book-card",
+				"app/js/app/components/bookcard/book-card.js"
+			],
+			[
+				"recommended",
+				"app/js/app/views/recommended/recommended.html"
+			],
+			[
+				"book-ct",
+				"app/js/app/views/explore/book-ctrl.js"
+			],
+			[
+				"about.h",
+				"app/js/app/views/about/about.html"
+			],
+			[
+				"book",
+				"app/js/app/components/book/book.html"
+			],
+			[
+				"shelves",
+				"app/js/app/views/shelves/shelves-ctrl.js"
+			],
+			[
+				"shelf-pick",
+				"app/js/app/components/shelfpicker/shelf-picker.js"
+			],
+			[
+				"shelf.",
+				"app/js/app/views/shelves/shelf.html"
+			],
+			[
+				"about.ht",
+				"app/js/app/views/about/about.html"
+			],
+			[
+				"cook",
+				"js\\app\\components\\book\\book.html"
+			],
+			[
+				"shelf-pic",
+				"js\\app\\components\\shelfpicker\\shelf-picker.js"
+			],
+			[
+				"root",
+				"js\\app\\views\\root\\root.html"
+			],
+			[
+				"fileut",
+				"core\\util\\fileutil.php"
+			],
+			[
+				"sql",
+				"core\\sql\\sql.php"
+			],
+			[
+				"model",
+				"core\\model\\model.php"
+			],
+			[
+				"core.php",
+				"core\\main\\core.php"
+			],
+			[
+				"util",
+				"core\\util\\util.php"
+			],
+			[
+				"config",
+				"app\\config\\config.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 33.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 585.0
+	},
+	"selected_group": 1,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 364.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

@@ -1,0 +1,21 @@
+{
+  "name": "books",
+  "version": "0.0.1",
+  "description": "A webapp to keep track of your books.",
+  "main": "app/js/app/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "books"
+  ],
+  "author": "scott@zeddic.com",
+  "license": "MIT",
+  "dependencies": {
+    "grunt": "~0.4.5"
+  },
+  "devDependencies": {
+    "grunt-contrib-requirejs": "~0.4.4",
+    "google-closure-compiler": "~20160208.1.0"
+  }
+}

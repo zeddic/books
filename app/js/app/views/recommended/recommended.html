@@ -1,0 +1,26 @@
+<div class="page-content">
+
+  <header class="page-title">Recommended Books</header>
+
+
+  <div>
+
+    <ol>
+      <book-card
+          class="slide-in"
+          animate-on-load
+          ng-repeat="book in ctrl.books"
+          show-shelf-picker="false"
+          show-votes="true"
+          on-voted="ctrl.onVoted(book)"
+          book="book">
+      </book-card>
+    </ol>
+
+    <div ng-if="ctrl.books.length == 0">
+      You have no recommended books.
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,11 @@
+<div class="page-content">
+  <header class="page-title">{{ ctrl.category.name }}</header>
+  <ol>
+    <book-card
+        ng-repeat="book in ctrl.books"
+        show-shelf-picker="true"
+        show-votes="false"
+        book="book">
+    </book-card>
+  </ol>
+</div>

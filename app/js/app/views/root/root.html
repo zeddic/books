@@ -1,0 +1,31 @@
+<div class="books-root">
+
+  <books-header></books-header>
+
+  <div class="books-body" ng-if="ctrl.googapi.apisLoaded">
+    <div class="books-sidebar">
+      <ol class="books-nav" ng-if="ctrl.googapi.apisLoaded">
+        <li><a ui-sref="shelves" ui-sref-active="active">Shelves</a></li>
+        <li><a ui-sref="recommended" ui-sref-active="active">Recommendations</a></li>
+        <li><a ui-sref="explore" ui-sref-active="active">Explore</a></li>
+        <li><a ui-sref="about" ui-sref-active="active">About</a></li>
+      </ol>
+      <div class="books-sidebar-footer">
+        <a href="https://books.google.com/" target="blank">
+          <img src="images/powered-by-google.png" class="powered-by-google">
+        </a>
+      </div>
+    </div>
+    <div class="books-content" ui-view></div>
+  </div>
+
+  <div class="books-loading" ng-if="!ctrl.googapi.apisLoaded">
+    <div ng-if="!ctrl.googapi.authorized" ng-cloak>
+      <button type="button" ng-click="ctrl.onAuth()"> Authorize Google Books</button>
+    </div>
+    <div>
+      Loading!
+    </div>
+  </div>
+
+</div>

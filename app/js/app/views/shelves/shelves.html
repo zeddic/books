@@ -1,0 +1,16 @@
+<div class="inner-pane">
+
+  <div class="inner-pane-nav">
+    <ol>
+      <li ng-repeat="shelf in ctrl.shelves">
+        <a class="inner-nav-link" ui-sref="shelves.shelf({shelfId: shelf.id})" ui-sref-active="active">
+          <span>{{ shelf.title }}</span>
+          <span class="counter" ng-show="shelf.volumeCount">{{ shelf.volumeCount }}</span>
+        </a>
+      </li>
+    </ol>
+
+  </div>
+  <div class="inner-pane-content" ui-view></div>
+
+</div>

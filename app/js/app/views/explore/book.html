@@ -1,0 +1,48 @@
+
+<div class="book-page-main">
+
+  <div>
+    <img ng-src="{{ ctrl.bookImageUrl }}"></img>
+  </div>
+
+  <div class="book-page-main-details">
+    <header class="title">{{ ctrl.book.volumeInfo.title }}</header>
+    <strong>{{ ctrl.book.volumeInfo.pageCount }}</strong> pages
+
+    <section class="book-action-bar">
+      <button type="button" class="btn" ng-click="ctrl.addToList()">
+        Add 'To Read'
+      </button>
+
+      <button type="button" class="btn" ng-click="ctrl.upvote()">
+        <span class="icon">thumb_up</span>
+      </button>
+
+      <button type="button" class="btn" ng-click="ctrl.downvote()">
+        <span class="icon">thumb_down</span>
+      </button>
+
+      <a class="btn" href="{{ ctrl.book.volumeInfo.canonicalVolumeLink }}" target="blank">
+        See on Google Books
+        <span class="icon">open_in_new</span>
+      </a>
+    </section>
+
+    <shelf-picker book-id="ctrl.bookId"></shelf-picker>
+
+    <div ng-bind-html="ctrl.book.volumeInfo.description"></div>
+  </div>
+
+</div>
+
+
+<div class="page-content">
+  <header class="title">Related Books</header>
+  <ol>
+    <li class="search-item" ng-repeat="i in ctrl.related.items">
+      <book-card book="i" art-only="true"></book-card>
+    </li>
+  </ol>
+</div>
+
+

@@ -1,0 +1,17 @@
+<dropdown>
+  <button type="button" class="btn" dropdown-toggle>
+    <span class="icon">{{ ctrl.getIconName() }}</span>
+    <span class="icon">arrow_drop_down</span>
+  </button>
+  <div dropdown-popup>
+    <ol>
+      <li ng-repeat="shelf in ctrl.shelves">
+        <button type="button" ng-click="ctrl.toggle(shelf)" class="shelf-picker-btn">
+          <span class="icon" ng-show="ctrl.in(shelf)">check_box</span>
+          <span class="icon" ng-show="!ctrl.in(shelf)">check_box_outline_blank</span>
+          {{ shelf.title }}
+        </button>
+      </li>
+    </ol>
+  </div> 
+</dropdown>

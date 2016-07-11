@@ -1,0 +1,18 @@
+<div class="page-content">
+  <ol ng-if="ctrl.books.length > 0" >
+    <book-card ng-repeat="book in ctrl.books" book="book"></book-card>
+  </ol>
+
+  <div ng-if="ctrl.books.length == 0">
+    This Shelf is Empty
+  </div>
+</div>
+
+<!-- <ol ng-if="ctrl.books.length > 0" 
+    sv-root
+    sv-part="ctrl.books"
+    sv-on-sort="ctrl.onSort($item, $indexTo)">
+  <book ng-repeat="book in ctrl.books" volume="book" sv-element></book>
+</ol>
+ -->
+ 

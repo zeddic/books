@@ -1,0 +1,27 @@
+<div class="book-card" ng-class="::{'art-only': ctrl.artOnly}">
+  <div class="book-card-art">
+    <a class="book-card-art-link"
+        ui-sref="explore.book({bookId: ctrl.book.id })">
+      <img ng-src="{{ ctrl.book.volumeInfo.imageLinks.thumbnail }}"
+           alt="{{::ctrl.book.volumeInfo.title}}">
+    </a>
+  </div>
+  <div class="book-card-meta" ng-if="::!ctrl.artOnly">
+    <div class="book-card-actions">
+      <shelf-picker
+          ng-if="::ctrl.showShelfPicker"
+          book-id="ctrl.book.id"
+          button-classes="clear"></shelf-picker>
+
+      <div class="btn-group" ng-if="::ctrl.showVotes">
+        <button type="button" class="btn clear" ng-click="ctrl.upvote()">
+          <span class="icon">thumb_up</span>
+        </button>
+
+        <button type="button" class="btn clear" ng-click="ctrl.downvote()">
+          <span class="icon">thumb_down</span>
+        </button>
+      </div>
+      </div>
+  </div>
+</div>

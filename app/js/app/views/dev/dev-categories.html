@@ -1,0 +1,82 @@
+<div class="page-content">
+
+  <header class="page-title">Explore Books</header>
+
+
+
+  <input type="text" ng-model="ctrl.lookupId" placeholder="Category id">
+  <button type="button" class="btn" ng-click="ctrl.lookup()">
+    Lookup
+  </button>
+
+  <br>
+  <br>
+
+
+  <div ng-if="ctrl.entries.length > 0">
+    <button type="button" class="btn" ng-click="ctrl.download()">
+      Download
+      <span class="icon">file_download</span>
+    </button>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>category</th>
+          <th>bookid</th>
+          <th>title</th>
+          <th>categories</th>
+          <th>description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="entry in ctrl.entries">
+          <td>{{entry.category}}</td>
+          <td>{{entry.bookid}}</td>
+          <td>{{entry.title}}</td>
+          <td>{{entry.categories}}</td>
+          <td>{{entry.description}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+
+  <!-- 
+
+    <table class="table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="category in ctrl.categories">
+        <td>{{category.categoryId}}</td>
+        <td>{{category.name}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  -->
+
+  
+  <!-- 
+  <section ng-repeat="category in ctrl.categories">
+    <header class="page-subtitle">{{ category.name }}</header>
+
+  
+    <ol>
+      <book-card
+          ng-repeat="book in category.books"
+          show-shelf-picker="true"
+          show-votes="false"
+          book="book">
+      </book-card>
+    </ol>
+
+  </section>
+  -->
+
+</div>
